@@ -1,10 +1,11 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Clientes;
 
 [ApiController]
 [Route("[controller]")]
 
-public class Hola{
+public class CadeteriaControler: ControllerBase{
     [HttpGet]
     public List<Pedidos> GetPedidos(){
 
