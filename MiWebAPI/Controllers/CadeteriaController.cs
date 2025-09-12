@@ -1,39 +1,48 @@
 using Microsoft.AspNetCore.Mvc;
+using Clientes;
 
 [ApiController]
 [Route("[controller]")]
 
-[HttpGet]
-public IActionResult GetPedidos(){
+public class Hola{
+    [HttpGet]
+    public List<Pedidos> GetPedidos(){
 
-}
+    }
 
-[HttpGet]
-public IActionResult GetCadetes(){
-    
-}
+    [HttpGet]
+    public List<Cadete> GetCadetes(){
+        
+    }
 
-[HttpGet]
-public IActionResult GetInforme(){
-    
-}
+    [HttpGet]
+    public Informe GetInforme(){
+        
+    }
 
-[HttpPost]
-public void AgregarPedido(Pedido pedido){
+    [HttpPost]
+    public void AgregarPedido(Pedidos pedido){
+        listadoPedidos.Add(pedido);
+    }
 
-}
+    [HttpPut]
+    public void AsignarPedido(int idPedido, int idCadete){
+        var cadete = listadoCadetes.Find(c => c.Id == idCadete);
+        var pedido = listadoPedidos.Find(p => p.Numero == idPedido);
 
-[HttpPut]
-public void AsignarPedido(int idPedido, int idCadete){
-    
-}
+        if (cadete != null && pedido != null)
+        {
+            pedido.Cadete = cadete;
+        } 
+    }
 
-[HttpPut]
-public void CambiarEstadoPedido(int idPedido,int NuevoEstado){
-    
-}
+    [HttpPut]
+    public void CambiarEstadoPedido(int idPedido,int NuevoEstado){
+        
+    }
 
-[HttpPut]
-public void CambiarCadetePedido(int idPedido,int idNuevoCadete){
-    
+    [HttpPut]
+    public void CambiarCadetePedido(int idPedido,int idNuevoCadete){
+        
+    }
 }

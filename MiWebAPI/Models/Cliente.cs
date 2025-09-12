@@ -145,5 +145,9 @@ namespace Clientes
             } 
         }
     }
+
+    public class Informe{
+        
+    }
 }
 
