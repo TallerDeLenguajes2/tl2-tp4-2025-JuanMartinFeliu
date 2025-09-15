@@ -6,44 +6,57 @@ using Clientes;
 [Route("[controller]")]
 
 public class CadeteriaControler: ControllerBase{
-    [HttpGet]
-    public List<Pedidos> GetPedidos(){
 
+    private static Cadeteria cadeteria = new Cadeteria("Mi Cadetería", "1234-5678");
+
+    [HttpGet("pedidos")]
+    public ActionResult<List<Pedidos>> GetPedidos(){
+        return Ok(cadeteria.ListadoPedidos);
     }
 
-    [HttpGet]
-    public List<Cadete> GetCadetes(){
+    [HttpGet("cadetes")]
+    public ActionResult<List<Cadete>> GetCadetes()
+    {
+        return Ok(cadeteria.ListadoCadetes);
         
     }
 
-    [HttpGet]
-    public Informe GetInforme(){
-        
+    [HttpGet("informe")]
+    public ActionResult<Informe> GetInforme()
+    {
+        return Ok(cadeteria.GenerarInforme());    
     }
 
-    [HttpPost]
-    public void AgregarPedido(Pedidos pedido){
-        listadoPedidos.Add(pedido);
+    [HttpPost("pedido")]
+    public ActionResult AgregarPedido(Pedidos pedido)
+    {
+        cadeteria.AgregarPedido(pedido);
+        return CreatedAtAction(nameof(GetPedidos), new { id = pedido.Numero }, pedido);
     }
 
     [HttpPut]
-    public void AsignarPedido(int idPedido, int idCadete){
-        var cadete = listadoCadetes.Find(c => c.Id == idCadete);
-        var pedido = listadoPedidos.Find(p => p.Numero == idPedido);
+    public ActionResult AsignarPedido(int idPedido, int idCadete)
+    {
+        cadeteria.AsignarCadeteAPedido(idCadete, idPedido);
+        return Ok("Pedido Asignado");    
+    }
 
-        if (cadete != null && pedido != null)
+    [HttpPut("cambiarestado")]
+    public ActionResult CambiarEstadoPedido(int idPedido, string NuevoEstado)
+    {
+        var pedido = cadeteria.ListadoPedidos.FirstOrDefault(p => p.Numero == idPedido);
+        if (pedido == null)
         {
-            pedido.Cadete = cadete;
-        } 
+            return NotFound("Pedido no encontrado");
+        }
+        pedido.cambiarEstado(NuevoEstado);
+        return Ok("Estado Actualizado");
     }
 
-    [HttpPut]
-    public void CambiarEstadoPedido(int idPedido,int NuevoEstado){
-        
-    }
-
-    [HttpPut]
-    public void CambiarCadetePedido(int idPedido,int idNuevoCadete){
-        
+    [HttpPut("cambiarcadete")]
+    public ActionResult CambiarCadetePedido(int idPedido, int idNuevoCadete)
+    {
+        cadeteria.AsignarCadeteAPedido(idNuevoCadete, idPedido);
+        return Ok("Cadete cambiado");
     }
 }

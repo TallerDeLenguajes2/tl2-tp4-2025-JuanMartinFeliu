@@ -47,8 +47,8 @@ namespace Clientes
 
         public string VerDatosCliente(Cliente cliente)
         {
-            string infoCliente = cliente.Nombre + ";" + cliente.Direccion + ";" +  cliente.Telefono + ";" + cliente.DatosReferenciaDireccion;
-            return infoCliente; 
+            string infoCliente = cliente.Nombre + ";" + cliente.Direccion + ";" + cliente.Telefono + ";" + cliente.DatosReferenciaDireccion;
+            return infoCliente;
         }
 
         public Pedidos(int nro, string obs, Cliente clte)
@@ -59,9 +59,9 @@ namespace Clientes
             this.estado = "Pendiente";
         }
 
-        public void cambiarEstado()
+        public void cambiarEstado(string NuevoEstado)
         {
-            estado = "Entregado";
+            estado = NuevoEstado;
         }
     }
 
@@ -96,7 +96,7 @@ namespace Clientes
         public string NombreCadeteria { get => nombreCadeteria; }
         public string TelefonoCadeteria { get => telefonoCadeteria; }
         public List<Cadete> ListadoCadetes { get => listadoCadetes; }
-        public List<Pedidos> ListadoPedidos {get => listadoPedidos;}
+        public List<Pedidos> ListadoPedidos { get => listadoPedidos; }
 
 
 
@@ -142,12 +142,32 @@ namespace Clientes
             if (cadete != null && pedido != null)
             {
                 pedido.Cadete = cadete;
-            } 
+            }
+        }
+
+        public Informe GenerarInforme()
+        {
+            int pendientes = listadoPedidos.Count(p => p.Estado == "Pendiente");
+            int entregados = listadoPedidos.Count(p => p.Estado == "Entregado");
+
+            return new Informe
+            {
+                TotalPedidos = listadoPedidos.Count,
+                PedidosPendientes = pendientes,
+                PedidosEntregados = entregados,
+                TotalCadetes = listadoCadetes.Count,
+                TotalGanancias = listadoCadetes.Sum(c => JornalACobrar(c.Id))
+            };
         }
     }
 
-    public class Informe{
-        
+    public class Informe
+    {
+        public int TotalPedidos { get; set; }
+        public int PedidosPendientes { get; set; }
+        public int PedidosEntregados { get; set; }
+        public int TotalCadetes { get; set; }
+        public float TotalGanancias { get; set; }
     }
 }
 
