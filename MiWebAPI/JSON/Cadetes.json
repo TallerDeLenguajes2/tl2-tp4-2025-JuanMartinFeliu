@@ -1,0 +1,12 @@
+[
+	{"nombre": "Juan Perez", "direccion": "Av. Siempre Viva 123", "telefono": 1134567890},
+	{"nombre": "Maria Gomez", "direccion": "Calle Falsa 456", "telefono": 1145678901},
+	{"nombre": "Carlos Ruiz", "direccion": "Boulevard Central 789", "telefono": 1156789012},
+	{"nombre": "Lucia Fernandez", "direccion": "Pasaje Los Pinos 321", "telefono": 1167890123},
+	{"nombre": "Pedro Martinez", "direccion": "Ruta 8 Km 15", "telefono": 1178901234},
+	{"nombre": "Sofia Lopez", "direccion": "Diagonal Sur 654", "telefono": 1189012345},
+	{"nombre": "Diego Torres", "direccion": "Av. Libertad 987", "telefono": 1190123456},
+	{"nombre": "Valentina Castro", "direccion": "Calle 9 de Julio 111", "telefono": 1101234567},
+	{"nombre": "Martina Sanchez", "direccion": "Camino Real 222", "telefono": 1112345678},
+	{"nombre": "Facundo Herrera", "direccion": "Av. San Martin 333", "telefono": 1123456789}
+]
