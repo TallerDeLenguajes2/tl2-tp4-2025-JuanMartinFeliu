@@ -1,13 +1,30 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Clientes;
+using DatosCadeteria;
 
 [ApiController]
 [Route("[controller]")]
 
 public class CadeteriaControler: ControllerBase{
 
-    private static Cadeteria cadeteria = new Cadeteria("Mi Cadetería", "1234-5678");
+    private AccesoADatosCadeteria AccesoCadeteria;
+    private AccesoADatosCadetes AccesoCadetes;
+    private AccesoADatosPedidos AccesoPedidos;
+    private Cadeteria cadeteria;
+
+    public CadeteriaControler()
+    {
+        DatosCadeteria = new();
+        DatosCadetes = new();
+        DatosPedidos = new();
+
+        cadeteria = DatosCadeteria.Obtener();
+
+        cadeteria.ListadoCadetes = DatosCadetes.Obtener();
+        cadeteria.ListadoPedidos = DatosPedidos.Obtener();
+    }
+    
 
     [HttpGet("pedidos")]
     public IActionResult<List<Pedidos>> GetPedidos(){
@@ -27,11 +44,18 @@ public class CadeteriaControler: ControllerBase{
         return Ok(cadeteria.GenerarInforme());    
     }
 
-    [HttpPost("pedido")]
+    [HttpPost("AgregarPedido")]
     public IActionResult AgregarPedido(Pedidos pedido)
     {
-        cadeteria.AgregarPedido(pedido);
-        return CreatedAtAction(nameof(GetPedidos), new { id = pedido.Numero }, pedido);
+        cadeteria.ListadoPedidos.Add(pedido);
+        if(cadeteria.ListadoPedidos.Contains(pedido))
+        {
+            DatosPedidos.Guardar(cadeteria,ListaPedidos);
+            return Ok("Pedido agregado correcatmente");
+        }
+        else{
+            return BadRequest("No se pudo agregar el pedido");
+        }
     }
 
     [HttpPut]
@@ -41,7 +65,7 @@ public class CadeteriaControler: ControllerBase{
         return Ok("Pedido Asignado");    
     }
 
-    [HttpPut("cambiarestado")]
+    [HttpPut("CambiarEstado")]
     public IActionResult CambiarEstadoPedido(int idPedido, string NuevoEstado)
     {
         var pedido = cadeteria.ListadoPedidos.FirstOrDefault(p => p.Numero == idPedido);
@@ -53,7 +77,7 @@ public class CadeteriaControler: ControllerBase{
         return Ok("Estado Actualizado");
     }
 
-    [HttpPut("cambiarcadete")]
+    [HttpPut("CambiarCadete")]
     public IActionResult CambiarCadetePedido(int idPedido, int idNuevoCadete)
     {
         cadeteria.AsignarCadeteAPedido(idNuevoCadete, idPedido);
