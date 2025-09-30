@@ -1,0 +1,98 @@
+[
+    {
+      "numero": 1,
+      "obs": "Entrega urgente",
+      "cliente": {
+        "nombre": "Juan Pérez",
+        "direccion": "Calle Falsa 123",
+        "telefono": "555-1234",
+        "datosReferenciaDireccion": "Junto al supermercado"
+      },
+      "estado": "Entregado",
+      "cadete": {
+        "id": 1,
+        "nombreCadete": "Carlos Martínez",
+        "direccionCadete": "Av. Siempre Viva 456",
+        "telefonoCadete": "555-2345"
+      },
+      "fechaCreacion": "2025-09-25T10:30:00",
+      "fechaEntrega": "2025-09-25T12:00:00"
+    },
+    {
+      "numero": 2,
+      "obs": "Pedido regular",
+      "cliente": {
+        "nombre": "Ana Gómez",
+        "direccion": "Av. Libertador 456",
+        "telefono": "555-2345",
+        "datosReferenciaDireccion": "Frente al parque central"
+      },
+      "estado": "Pendiente",
+      "cadete": {
+        "id": 2,
+        "nombreCadete": "Luis García",
+        "direccionCadete": "Calle San Martín 789",
+        "telefonoCadete": "555-8765"
+      },
+      "fechaCreacion": "2025-09-25T11:00:00",
+      "fechaEntrega": null
+    },
+    {
+      "numero": 3,
+      "obs": "Pedido con instrucciones especiales",
+      "cliente": {
+        "nombre": "Pedro Rodríguez",
+        "direccion": "Calle 9 de Julio 789",
+        "telefono": "555-3456",
+        "datosReferenciaDireccion": "Cerca de la estación de tren"
+      },
+      "estado": "En Proceso",
+      "cadete": {
+        "id": 3,
+        "nombreCadete": "María López",
+        "direccionCadete": "Calle San José 432",
+        "telefonoCadete": "555-7654"
+      },
+      "fechaCreacion": "2025-09-25T14:00:00",
+      "fechaEntrega": null
+    },
+    {
+      "numero": 4,
+      "obs": "Entrega con retardo",
+      "cliente": {
+        "nombre": "Laura Sánchez",
+        "direccion": "Calle San Martín 321",
+        "telefono": "555-4567",
+        "datosReferenciaDireccion": "A una cuadra de la iglesia"
+      },
+      "estado": "Pendiente",
+      "cadete": {
+        "id": 4,
+        "nombreCadete": "Juan Hernández",
+        "direccionCadete": "Calle Corrientes 456",
+        "telefonoCadete": "555-2345"
+      },
+      "fechaCreacion": "2025-09-25T15:00:00",
+      "fechaEntrega": null
+    },
+    {
+      "numero": 5,
+      "obs": "Pedido de última hora",
+      "cliente": {
+        "nombre": "Ricardo Pérez",
+        "direccion": "Calle Belgrano 654",
+        "telefono": "555-5678",
+        "datosReferenciaDireccion": "Cerca del supermercado"
+      },
+      "estado": "Entregado",
+      "cadete": {
+        "id": 5,
+        "nombreCadete": "Pedro Sánchez",
+        "direccionCadete": "Calle San Martín 123",
+        "telefonoCadete": "555-9876"
+      },
+      "fechaCreacion": "2025-09-25T16:00:00",
+      "fechaEntrega": "2025-09-25T17:00:00"
+    }
+  ]
+  
