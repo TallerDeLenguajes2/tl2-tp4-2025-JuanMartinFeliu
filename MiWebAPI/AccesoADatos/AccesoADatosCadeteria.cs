@@ -7,7 +7,7 @@ namespace DatosCadeteria
     {
         Cadeteria Obtener()
         {
-            string path = File.ReadAllText("D:/Taller de Lenguajes ll/tl2-tp4-2025-JuanMartinFeliu/MiWebAPI/JSON/Cadeteria.json");
+            string path = File.ReadAllText("JSON/Cadeteria.json");
             Cadeteria NuevaCad = JsonSerializer.Deserialize<Cadeteria>(path);
             return NuevaCad;
         }

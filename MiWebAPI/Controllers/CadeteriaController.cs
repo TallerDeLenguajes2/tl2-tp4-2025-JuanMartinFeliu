@@ -7,39 +7,29 @@ using DatosCadeteria;
 [Route("[controller]")]
 
 public class CadeteriaControler: ControllerBase{
-
-    private AccesoADatosCadeteria AccesoCadeteria;
-    private AccesoADatosCadetes AccesoCadetes;
-    private AccesoADatosPedidos AccesoPedidos;
-    private Cadeteria cadeteria;
-
     public CadeteriaControler()
     {
-        DatosCadeteria = new();
-        DatosCadetes = new();
-        DatosPedidos = new();
-
-        cadeteria = DatosCadeteria.Obtener();
-
-        cadeteria.ListadoCadetes = DatosCadetes.Obtener();
-        cadeteria.ListadoPedidos = DatosPedidos.Obtener();
     }
     
 
     [HttpGet("pedidos")]
-    public IActionResult<List<Pedidos>> GetPedidos(){
-        return Ok(cadeteria.ListadoPedidos);
+    public IActionResult GetPedidos(){
+        var datosPedidos = new AccesoADatosPedidos();
+        var pediditos = datosPedidos.Obtener();
+        return Ok(pediditos);
     }
 
     [HttpGet("cadetes")]
-    public IActionResult<List<Cadete>> GetCadetes()
+    public IActionResult GetCadetes()
     {
-        return Ok(cadeteria.ListadoCadetes);
+        var datosCadetes = new AccesoADatosCadetes();
+        var cadetitos = datosCadetes.Obtener();
+        return Ok(cadetitos);
         
     }
 
     [HttpGet("informe")]
-    public IActionResult<Informe> GetInforme()
+    public IActionResult GetInforme()
     {
         return Ok(cadeteria.GenerarInforme());    
     }
@@ -47,15 +37,8 @@ public class CadeteriaControler: ControllerBase{
     [HttpPost("AgregarPedido")]
     public IActionResult AgregarPedido(Pedidos pedido)
     {
-        cadeteria.ListadoPedidos.Add(pedido);
-        if(cadeteria.ListadoPedidos.Contains(pedido))
-        {
-            DatosPedidos.Guardar(cadeteria,ListaPedidos);
-            return Ok("Pedido agregado correcatmente");
-        }
-        else{
-            return BadRequest("No se pudo agregar el pedido");
-        }
+        var accesoPedidos = new AccesoADatosPedidos();
+        var PedidoCreado = accesoPedidos.Guardar(pedido);
     }
 
     [HttpPut]
